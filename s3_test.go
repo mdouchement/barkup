@@ -1,9 +1,10 @@
 package barkup
 
 import (
-	"launchpad.net/goamz/aws"
 	"os"
 	"testing"
+
+	"gopkg.in/amz.v1/aws"
 )
 
 func Test_S3_Store_Success(t *testing.T) {
@@ -51,6 +52,7 @@ func Test_S3_Store_ExportError(t *testing.T) {
 		ClientSecret: "adsfljdsahfl",
 	}
 
+	os.Mkdir("test", 0755)
 	_, _ = os.Create("test/test.txt")
 	err := s.Store(&ExportResult{"", "text/plain", &Error{}}, "test/")
 	refute(t, err, nil)
